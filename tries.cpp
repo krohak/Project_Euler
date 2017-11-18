@@ -172,6 +172,63 @@ int Tree::find(string name){
   4. count the number of siblings [including the first] and return it
   */
 
+//!! modify code to work with nth character
+
+  Node* node = new Node;
+  node = head;
+
+  int cur_c = 0;
+  int num = 0;
+  char last = name[name.length()-1]
+
+  if (node->left_child != NULL){
+
+    node=node->left_child;
+
+    while(node != NULL){
+
+      if(node->c != name[cur_c] && node->right_sibling == NULL){   //node->left_child null or not null [end of list]
+        return num;
+      }
+
+      else if(node->c == name[cur_c] && node->left_child == NULL){  //either node->right_sibling is null or not [end of list or not]
+        num++;
+        return num;
+      }
+
+      else if(node->c == name[cur_c]){
+        node = node->left_child;
+        num++;
+        cur_c++;
+
+        if (cur_c == name.length()){
+
+          while(node->right_sibling!=NULL){
+
+              //cout << "hello";
+              node = node->right_sibling;
+              num++;
+              //cout << node1->c;
+
+            }
+            return num;
+        }
+
+
+      }
+
+      if(node->right_sibling == NULL){
+        return num;
+      }
+
+      //cout << "hi1";
+      node=node->right_sibling;
+
+    }
+  }
+
+
+
 }
 
 int main(){
