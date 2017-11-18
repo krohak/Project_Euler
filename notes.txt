@@ -1,0 +1,56 @@
+https://www.hackerrank.com/domains/tutorials/cracking-the-coding-interview
+
+In the bottom-up approach, we calculate the smaller values of fib first, then build larger values from them.
+
+This method also uses O(n) time since it contains a loop that repeats n − 1 times, but it only takes constant (O(1)) space,
+in contrast to the top-down approach which requires O(n) space to store the map.
+
+
+ function fib(n)
+       if n = 0
+           return 0
+       else
+           var previousFib := 0, currentFib := 1
+           repeat n − 1 times // loop is skipped if n = 1
+               var newFib := previousFib + currentFib
+               previousFib := currentFib
+               currentFib  := newFib
+       return currentFib
+
+
+
+
+
+Bellman Ford
+
+
+
+Djikstra's
+SHORTEST PATH B/W TWO POINTS
+
+1. To start, each point's initial cost value is set.
+2. Starting point set to 0 (user), all others to infinity
+3. Starting from present location, we search for unexplored points.
+    - once found, these points become candidates for moving to next
+4. Cost of each candidate points is calculated.
+    - The method of calculation is the current point's cost + the cost of moving to a candidate point
+5. IF CALCULATED COST LESS THAN THE CURRENT VALUE (OF THE POINT), COST OF POINT IS UPDATED
+6. WE CHOOSE THE ONE WITH THE LOWEST COST
+7. Repeat from 3
+
+
+
+Floyd Warshall
+
+
+
+
+
+DYNAMIC PROGRAMMING DAVIS STAIRCASE
+
+https://www.hackerrank.com/challenges/ctci-recursive-staircase/problem
+https://www.hackerrank.com/challenges/ctci-recursive-staircase/forum
+
+
+FIBONNACI USING MATRIX
+https://www.nayuki.io/page/fast-fibonacci-algorithms
