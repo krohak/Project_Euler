@@ -85,7 +85,7 @@ class Shark(Fish):
         self.teeth = teeth
 
     def swim_backwards(self):
-        super(Shark,self).swim()
+        super().swim()
         print("The shark cannot swim backwards, but can sink backwards.")
 
     def skeleton(self):

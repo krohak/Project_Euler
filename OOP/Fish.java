@@ -1,8 +1,4 @@
- class fish{
-
-    static int no=0;
-
-    static class Fish{
+class Fish{
 
        private static int counter=0;
        private int fin = 4;
@@ -33,6 +29,36 @@
          System.out.println("Fish has been destroyed");
        }
 
+       @Override
+       public int hashCode(){
+         final int prime =31;
+         int result =1;
+
+         result = prime*result+fin;
+         return result;
+
+       }
+
+       @Override
+       public boolean equals(Object obj){
+
+         if(this == obj)
+            return true;
+         if(obj == null)
+            return false;
+         if(getClass() != obj.getClass())
+           return false;
+
+         Fish other = (Fish) obj;
+         if (fin == 0){
+           if(other.fin != 0)
+            return false;
+         }
+         else if(fin != (other.fin))
+            return false;
+         return true;
+       }
+
        public int getFin(){
          return fin;
        }
@@ -58,46 +84,3 @@
          System.out.println("Skl");
        }
    }
-
-   static class Shark extends Fish{
-
-      private int teeth;
-
-      Shark(int teeth){
-        this.teeth = teeth;
-      }
-
-      public int getTeeth(){
-        return teeth;
-      }
-
-   }
-
-
-
-   public static void main(String[] args){
-
-     Fish f = new Fish();
-     Fish f2 = new Fish();
-     System.out.println(f.getFin());
-     f2.setFin(9);
-     System.out.println(f.getFin());
-     System.out.println(f2.getFin());
-     System.out.println(Fish.getFishInstances());
-
-     System.out.println(no);
-
-     Shark s1 = new Shark(92);
-     System.out.println(s1.getTeeth());
-     System.out.println(s1.getFin());
-
-
-     System.gc();
-   }
-
-
-
-
-
-
-}
