@@ -102,10 +102,11 @@ void Tree::add(string name){
           node = node->left_child;
         //  cout <<"hi3";
           cur_c++;
-        }
 
-        if(node->right_sibling == NULL){
-          break;
+          if(node->right_sibling == NULL){
+            break;
+          }
+
         }
 
         //cout << "hi1";
@@ -133,7 +134,6 @@ void Tree::print_children(){
   Node* node1 = new Node;
   node1 = head->left_child;
   node1 = node1 -> right_sibling;
-  node1 = node1 -> right_sibling;
   cout << node1->c;
   //cout << "yas";
 
@@ -143,9 +143,11 @@ void Tree::print_children(){
     return;
   }*/
 
-/*  while(node1->right_sibling!=NULL){
+if(node1 !=NULL){
 
-    cout << "hello";
+/* while(node1->right_sibling!=NULL){
+
+    //cout << "hello";
     node1 = node1->right_sibling;
     cout << node1->c;
 
@@ -159,7 +161,7 @@ void Tree::print_children(){
 
 
   }
-
+}
   return;
 }
 
@@ -179,7 +181,7 @@ int Tree::find(string name){
 
   int cur_c = 0;
   int num = 0;
-  char last = name[name.length()-1]
+  //char last = name[name.length()-1]
 
   if (node->left_child != NULL){
 
@@ -187,43 +189,56 @@ int Tree::find(string name){
 
     while(node != NULL){
 
-      if(node->c != name[cur_c] && node->right_sibling == NULL){   //node->left_child null or not null [end of list]
-        return num;
-      }
+      if(node->c != name[cur_c]){
+        //cout<< "hi";
 
-      else if(node->c == name[cur_c] && node->left_child == NULL){  //either node->right_sibling is null or not [end of list or not]
-        num++;
-        return num;
+        node = node -> right_sibling;
+
+        if (node->right_sibling == NULL){
+        return 0;
+       }
+
       }
 
       else if(node->c == name[cur_c]){
-        node = node->left_child;
-        num++;
-        cur_c++;
 
-        if (cur_c == name.length()){
+                if( node->left_child == NULL){  //either node->right_sibling is null or not [end of list or not]
 
-          while(node->right_sibling!=NULL){
+                  cur_c++;
 
-              //cout << "hello";
-              node = node->right_sibling;
-              num++;
-              //cout << node1->c;
+                 if (cur_c != name.length()){ //found no occurance of string
+                    //cout <<"hi";
+                    return 0;
+                  }
 
-            }
-            return num;
-        }
+                num++;
+                return num;  //found one occurance
+                }
+
+              else { //finding a char when child isnt nulll
+                node = node->left_child;
+                //num++;
+                cur_c++;
 
 
-      }
+                if (cur_c == name.length()){ //if whole string found
 
-      if(node->right_sibling == NULL){
-        return num;
-      }
+                  while(node->right_sibling!=NULL){
 
-      //cout << "hi1";
-      node=node->right_sibling;
+                      //cout << "hello";
+                      node = node->right_sibling;
+                      num++;
+                      //cout << node1->c;
 
+                    }
+                    //cout <<"debug";
+                    return num;  //counted all siblings
+                }
+
+                node=node->right_sibling;
+
+              }
+          }
     }
   }
 
@@ -242,7 +257,8 @@ int main(){
         cin >> contact;
         T.add(contact);
     }
-    T.print_children();
+    //T.print_children();
+    cout << T.find("as");
     //cout << T.head;
     return 0;
 }
