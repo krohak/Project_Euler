@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 class Fish{
+
 
        private static int counter=0;
        private int fin = 4;
@@ -7,12 +10,17 @@ class Fish{
        protected String prot;
        public String pub;
 
+       //public Scales [] scales;
+       ArrayList <Scales> scales = new ArrayList<Scales>();
 
        Fish(){
 
          priv =  "I am private";
          prot = "I am protected";
          pub = "I am public";
+         Scales scale = new Scales();
+         scale.type = Type.black;
+         scales.add(scale);
          counter+=1;
 
        }

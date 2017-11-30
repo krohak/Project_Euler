@@ -1,0 +1,5 @@
+class Scales{
+
+  Type type;
+
+}
