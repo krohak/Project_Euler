@@ -1,15 +1,14 @@
-import java.util.LinkedList;
-import java.util.Collections;
+import java.util.LinkedHashSet;
+//import java.util.HashSet;
 
- class datastructsll{
+ class datastructset{
 
    public static void main(String[] args){
 
-     LinkedList<String> colors = new LinkedList<String>();
+     LinkedHashSet<String> colors = new LinkedHashSet<String>();
 
      colors.add("Red");
-     colors.addFirst("Blue");
-     colors.addFirst("Green");
+     colors.add("Blue");
      System.out.println(colors);
 
      System.out.println(colors.contains("Red"));
@@ -17,18 +16,16 @@ import java.util.Collections;
 
 
      try{
-            colors.get(0);
+            //colors.get(1);
             System.out.println(colors);
      }
      catch(Exception e){
        System.out.println("what");
      }
 
-     Collections.sort(colors);
-
-     for(String s: colors){
+     /*for(String s, Integer i: colors){
        System.out.println(s);
-     }
+     }*/
 
      colors.clear();
      System.out.println(colors);

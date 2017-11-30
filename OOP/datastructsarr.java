@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
+
+import java.util.Iterator;
 
  class datastructsarr{
 
@@ -7,6 +10,7 @@ import java.util.ArrayList;
      ArrayList<String> colors = new ArrayList<String>();
 
      colors.add("Red");
+     colors.add("Blue");
      System.out.println(colors);
 
      System.out.println(colors.contains("Red"));
@@ -20,12 +24,19 @@ import java.util.ArrayList;
        System.out.println("what");
      }
 
-     for(String s: colors){
+     Collections.sort(colors);
+     //System.out.println(Collections.binarySearch(colors,"Red"));
+
+     /*for(String s: colors){
        System.out.println(s);
-     }
+     }*/
+
+     Iterator <String> it = colors.iterator();
+     while(it.hasNext()){
+     System.out.println(it.next());}
 
      colors.clear();
-     System.out.println(colors);
+     //System.out.println(colors);
 
 
    }
