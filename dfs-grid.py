@@ -22,6 +22,7 @@ def memoize(f):
         if has not in memo:
             memo[has] = f(x,n,m)
             #print(x,memo)
+
         return memo[has]
 
     return helper
@@ -31,13 +32,17 @@ def memoize(f):
 def neighbours(node,n,m):
     #check if active neighbours exist
     active=[]
-    for x in range(n):
-        for y in range(m):
-            if not x == node[0] or not y == node[1]:
-                if x <= node[0]+1 and x >= node[0]-1 and y <= node[1]+1 and y >= node[1]-1:
-                    if grid[x][y] == 1:
-                        active.append([x,y])
+    for x in range(-1,2):
+        for y in range(-1,2):
+            a = node[0] + x
+            b = node[1] + y
+            
+            if (a >= 0 and a < n and b>=0 and b < m):
+                if(not a == node[0] or not b == node[1]):
+                    if grid[a][b] == 1:
+                        active.append([a,b])
     return active
+
 
 
 def dfs(node,grid,n,m):
@@ -55,7 +60,7 @@ def dfs(node,grid,n,m):
             if (hashlib.sha224(str(neighbour).encode('utf-8')).hexdigest()) not in explored:
                 region = recursive_dls(neighbour,grid,explored,region)
                 region+=1
-
+                
         return region
 
     region = recursive_dls(node,grid,explored,region)
@@ -71,3 +76,4 @@ for grid_i in range(n):
     grid.append(grid_t)
 #print(grid[0][0])
 print(getBiggestRegion(grid,n,m))
+

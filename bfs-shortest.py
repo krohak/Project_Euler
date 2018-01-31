@@ -45,3 +45,4 @@ for i in range(t):
     s = int(input())
     distances=graph.find_all_distances(s-1)
     print(" ".join([repr(x) for x in distances if x != 0]))
+
