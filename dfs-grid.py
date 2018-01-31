@@ -1,3 +1,11 @@
+'''
+- convert obj to string
+- utf-8 encode of string
+- hashlib
+- hashlib.sha224().hexdigest()
+'''
+
+
 import hashlib
 
 def getBiggestRegion(grid,n,m):
@@ -36,7 +44,7 @@ def neighbours(node,n,m):
         for y in range(-1,2):
             a = node[0] + x
             b = node[1] + y
-            
+
             if (a >= 0 and a < n and b>=0 and b < m):
                 if(not a == node[0] or not b == node[1]):
                     if grid[a][b] == 1:
@@ -60,7 +68,7 @@ def dfs(node,grid,n,m):
             if (hashlib.sha224(str(neighbour).encode('utf-8')).hexdigest()) not in explored:
                 region = recursive_dls(neighbour,grid,explored,region)
                 region+=1
-                
+
         return region
 
     region = recursive_dls(node,grid,explored,region)
@@ -76,4 +84,3 @@ for grid_i in range(n):
     grid.append(grid_t)
 #print(grid[0][0])
 print(getBiggestRegion(grid,n,m))
-
