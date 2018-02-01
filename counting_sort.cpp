@@ -1,10 +1,9 @@
-/*
 
 #include <bits/stdc++.h>
 
 int price[n]
 int frequency[10004]
-int B[10004]
+int B[n]
 
 memset(frequency, 0, sizeof(frequency))
 
@@ -23,11 +22,11 @@ for(int i=0; i<10004; i++){
   frequency[i]--;
 }
 
-*/
+//////////////////////////
 
 #include<bits/stdc++>
 int A[n]
-int B[1004]
+int B[n]
 int C[1004]
 
 memset(C,0,sizeof(C))
