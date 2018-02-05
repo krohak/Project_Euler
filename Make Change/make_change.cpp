@@ -1,37 +1,37 @@
 #include <bits/stdc++.h>
 #include <unordered_map>
-#include <string> 
+#include <string>
 
 using namespace std;
 
-long getWays(long n, vector <long> c, int index, unordered_map <string,long> memo ){
-    
+long getWays(long n, vector <long> c, int index, unordered_map <string,long> & memo ){
+
     if(n == 0){
         return 1;
     }
-    
+
     if(index >= c.size()){
         return 0;
     }
-    
+
     string key;
     key = to_string(n) + '-' + to_string(index);
-    
+
     if(memo.count(key)){
         return memo[key];
     }
-    
+
     long ways = 0;
     long new_n = n;
-    
+
     while(new_n >= 0){
         ways+=getWays(new_n,c,index+1,memo);
         new_n-=c[index];
     }
-    
-    
+
+
     memo[key] = ways;
-    
+
     return ways;
 }
 
@@ -54,4 +54,3 @@ int main() {
     cout << ways;
     return 0;
 }
-
