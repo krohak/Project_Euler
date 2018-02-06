@@ -16,7 +16,7 @@ def Graph(object):
 
         frontier.append(node)
 
-        while(len(frontier)):
+        while(frontier):
 
         node = frontier.pop(0)
         explored.add(node)
