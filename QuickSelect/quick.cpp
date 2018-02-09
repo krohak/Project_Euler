@@ -3,20 +3,15 @@ public:
 
     int partition (vector<int>& nums, int l, int r){
 
-      int pivot = nums[l];
-
-      while (l<r){
-
-        while (nums[l] <= pivot){l++;}
-        while (nums[r] > pivot){r--;}
-
-        swap(nums[l],nums[r]);
-
-      }
-
-      swap(nums[l],nums[pivot]);
-
-      return l;
+    int x = nums[r], i = l;
+    for (int j = l; j < r ; j++) {
+        if (nums[j] <= x) {
+            swap(nums[i], nums[j]);
+            i++;
+        }
+    }
+    swap(nums[i], nums[r]);
+    return i;
 
     }
 
@@ -24,14 +19,13 @@ public:
     int quick_select(vector<int> & nums, int k, int l, int r){
 
 
-    if (k > 0 && k <= r - l + 1) {
-
         int pivot = partition(nums,l,r);
-        cout << pivot;
+        cout << pivot <<endl;
 
         int target = nums.size() - k;
 
           if (pivot == target){
+            cout << "anser";
             return nums[pivot];
           }
 
@@ -42,7 +36,6 @@ public:
           else if ( pivot > target ){
             return quick_select(nums,k,l,pivot-1);
           }
-      }
     }
 
 
