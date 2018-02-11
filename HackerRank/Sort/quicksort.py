@@ -1,34 +1,26 @@
 def partition(arr,p,r):
-    v = arr[p]
-    i = p+1
-    j = r-1
+    v = arr[r]
+    i = p
 
-    while(True):
-
-        while (arr[i] < v):
+    for j in range(p,r):
+        if arr[j] <= v:
+            arr[j], arr[i] = arr[i], arr[j]
             i+=1
-        while (arr[j] > v):
-            j-=1
 
-        if(i<j):
-            arr[i], arr[j] = arr[j], arr[i]
-            print(arr, i, j)
-        elif(j>i):
-            return j
-
-
+    arr[i], arr[r] = arr[r], arr[i]
+    return i
 
 def quick_sort(arr,p,r):
     if (r>p):
         q = partition(arr,p,r)
         quick_sort(arr,p,q)
         quick_sort(arr,q+1,r)
-    else:
+
         return arr
 
 
-random_list = [7,432,9,2,5,2,3245]
-print(quick_sort(random_list,0,len(random_list)))
+random_list = [7,432,9,5,2,3245]
+print(quick_sort(random_list,0,len(random_list)-1))
 
 '''import numpy as np
 for k in range(100):
