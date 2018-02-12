@@ -47,18 +47,17 @@ string sort_strings(string first, string second){
         // For ordered map
 
         // Vanilla
-        /*  for (itr_map = hash_table.begin(); itr_map != hash_table.end(); itr_map++){
+       for (itr_map = hash_table.begin(); itr_map != hash_table.end(); itr_map++){
             for (int i = 0; i<=(*itr_map).second; i++){
               third+=(*itr_map).first;
             }
-           }*/
+           }
 
         // Range
-        for (auto elem: hash_table) {
-                for (int i=0; i<= elem.second; i++) {
+      /*             for (int i=0; i<= elem.second; i++) {
                         third+= elem.first;
                 }
-        }
+        }*/
 
         return third;
 
