@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 def merge_sort(arr):
 
     # if len <= 1, return
@@ -6,8 +8,8 @@ def merge_sort(arr):
 
     # split the array in equal halves
     n = len(arr)
-    arr1 = arr[0:n//2]
-    arr2 = arr[n//2:]
+    arr1 = deepcopy(arr[0:n//2])
+    arr2 = deepcopy(arr[n//2:])
 
 
     # call mergesort on halves
@@ -45,12 +47,13 @@ def merge_sort(arr):
 #print(a)
 
 import numpy as np
-for k in range(100):
+for k in range(1):
     n=100
     random_list = np.random.rand(100)*100
-
+    print(random_list)
     #print(random_list)
     #bubble_sort(random_list,n)
     #insertion_sort(random_list,n)
     random_list = merge_sort(random_list)
+    print(random_list)
     print(all(random_list[i] <= random_list[i+1] for i in range(len(random_list)-1)))

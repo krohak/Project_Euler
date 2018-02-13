@@ -1,5 +1,4 @@
 #!/bin/python3
-
 import sys
 from copy import deepcopy
 
@@ -28,21 +27,27 @@ def merge_sort(arr,inversion_count):
 
     while(i < len(arr) and count1 < len(arr1) and count2 < len(arr2)):
         if (arr1[count1] <= arr2[count2]):
+            if (arr1[count1] > 2*arr2[count2-1] and count2 != 0):
+                inversion_count+=count2
             arr[i] = arr1[count1]
             count1+=1
             i+=1
-            inversion_count+=count2
+
 
         else:
             arr[i] = arr2[count2]
             count2+=1
             i+=1
 
+
     while (count1 < len(arr1)):
+        if (arr1[count1] > 2*arr2[count2-1] and count2 != 0):
+            print(arr1[count1],arr2[count2-1])
+            inversion_count+=count2
         arr[i] = arr1[count1]
         count1+=1
         i+=1
-        inversion_count+=count2
+
 
     while (count2 < len(arr2)):
         arr[i] = arr2[count2]
@@ -62,15 +67,9 @@ def count_inversions(arr):
 
 import numpy as np
 
-
-random_list = [1,88,86,94,53]
+#n=100
+#random_list = np.random.rand(5)*100
+#print(random_list)
+random_list = [1,88,86,194,53]
 c = count_inversions(random_list)
 print(c)
-
-# if __name__ == "__main__":
-#     t = int(input().strip())
-#     for a0 in range(t):
-#         n = int(input().strip())
-#         arr = list(map(int, input().strip().split(' ')))
-#         result = count_inversions(arr)
-#         print(result)
