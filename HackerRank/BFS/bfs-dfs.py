@@ -29,7 +29,8 @@ def Graph(object):
     def call_dfs(self):
         explored=set()
         for node in self.nodes:
-            dfs(node)
+            if node not in explored:
+                dfs(node)
 
     def dfs(self, initital):
         if not self.edges[initial]:
