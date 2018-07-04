@@ -27,6 +27,17 @@ def main():
     productOf(1,2,3)
     productOf(1,2)
 
+    '''
+    traverse array backward
+        compute multiplication of right part at each step
+        store in memo
+    
+    traverse forward
+        divide into left, skip, right
+        compute multiplication of left part using mult of prev left
+        lookup right from memo
+    '''
+
 
 if __name__ == "__main__":
     main()
