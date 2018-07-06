@@ -23,7 +23,6 @@ class Solution:
 '''
 traverse array backward
     compute multiplication of right part at each step using mult of prev right
-    store in memo
 '''
 def goBack(arr):
 
@@ -40,7 +39,6 @@ def goBack(arr):
 '''
 traverse forward
     compute multiplication of left part using mult of prev left
-    lookup right from memo
 '''
 def goForward(arr):
 
