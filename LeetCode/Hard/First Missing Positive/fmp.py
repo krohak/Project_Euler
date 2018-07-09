@@ -10,7 +10,7 @@ def dividePositive(nums):
         if forward <= backward:
             nums[forward], nums[backward] = nums[backward], nums[forward]
             backward -= 1
-            forward += 1    
+            forward += 1 
     # print(nums, forward, backward)
     return nums[:forward]
 
@@ -85,7 +85,7 @@ def missingInPositiveSequence(nums):
 
         else:
             # missing number lies in left half
-            last = pointer
+            last = pointer+1
 
         middle = (last+first) // 2
 
