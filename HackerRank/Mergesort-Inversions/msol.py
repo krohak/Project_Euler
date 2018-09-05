@@ -21,8 +21,8 @@ def inversions(arr):
 
 for _ in range(input()):
     n = input()
-    arr = map(int,raw_input().split())
+    arr = map(int,input().split())
     print(arr)
     counts = inversions(arr)
-    print arr
-    print counts
+    print(arr)
+    print(counts)

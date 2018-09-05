@@ -6,21 +6,21 @@ def Graph(object):
         self.distances=[]
         self.nodes=set()
 
-    def connect(x,y):
+    def connect(self,x,y):
         self.edges[x].add(y)
         self.edges[y].add(x)
         self.nodes.add(x)
         self.nodes.add(y)
 
-    def bfs(self, initial):
+    def bfs(self, node):
         frontier=[]
         explored=set()
 
         frontier.append(node)
 
         while(frontier):
-        node = frontier.pop(0)
-        explored.add(node)
+            node = frontier.pop(0)
+            explored.add(node)
             for neighbour in self.edges[node]:
                 if neighbour not in explored and neighbour not in frontier:
                     frontier.append(neighbour)
@@ -30,13 +30,13 @@ def Graph(object):
         explored=set()
         for node in self.nodes:
             if node not in explored:
-                dfs(node)
+                self.dfs(node, explored)
 
-    def dfs(self, initital):
+    def dfs(self, initial, explored):
         if not self.edges[initial]:
             return
-        explored.add(initital)
-        for neighbour in self.edges[node]:
+        explored.add(initial)
+        for neighbour in self.edges[initial]:
             if neighbour not in explored:
-                dfs(neighbour)
+                self.dfs(neighbour, explored)
         return
