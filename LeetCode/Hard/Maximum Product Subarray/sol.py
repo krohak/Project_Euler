@@ -1,6 +1,4 @@
 class Solution:
-    # @param A : tuple of integers
-    # @return an integer
     def maxProduct(self, nums):
         if len(nums) == 0:
             return 0
