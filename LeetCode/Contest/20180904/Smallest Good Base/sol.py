@@ -5,13 +5,13 @@ class Solution(object):
      
         number = int(n)
 
-        power_ceil = ceil(log(number, 2)) #60
+        power_ceil = 60 #ceil(log(number, 2)) 
         power_floor = power_ceil - 1
 
         # if number == ((2**power_ceil ) -1):
         #     return(str(2))
-
-        for base in range(2, number+1):
+        base = 2
+        while base <= number:
 
             while number <= (base ** power_floor):
                 power_ceil = power_floor
@@ -22,6 +22,9 @@ class Solution(object):
             if dig_sum == number:
                 return(str(base))
 
+            base+=1
 
-solobj = Solution().smallestGoodBase(14919921443713777)  #2251799813685247 #4681
+
+
+solobj = Solution().smallestGoodBase(470988884881403701)  #14919921443713777 #2251799813685247 #4681
 print(solobj)
