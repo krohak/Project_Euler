@@ -1,7 +1,8 @@
 # 3
 '''
 Mathematical Solution
-Suppose base is the good base we need to finally ask, k is the number of 1 after the hexadecimal conversion, then we can get the following equation: 
+Suppose base is the good base we need to finally ask, k is the number of 1 after the hexadecimal conversion, 
+then we can get the following equation: 
 
 base^(k-1) + base^(k-2) + ... + base^1 + base^0 = N ... [1] 
 base^k + base^(k-1) + ... + base^2 + base^1 = N * base 
@@ -33,7 +34,7 @@ class Solution3(object):
             # from equation [3], we have
             thisBase = int(num ** (1.0/(thisLen - 1)))
             # from equation [2], we have
-            if num * (thisBase - 1) == thisBase ** thisLen - 1:
+            if num * (thisBase - 1) == (thisBase ** thisLen) - 1:
                 return str(thisBase)
             thisLen -= 1
         return str(num - 1)

@@ -1,7 +1,7 @@
 # 1
 '''
 Naive Solution 
-According to the meaning of the topic, it is easy to write the checkBase(base,n) function. For a given baes, determine whether the base is a good base of a given number n, and the time complexity of this judgment function is O(log N).
+According to the meaning of the topic, it is easy to write the checkBase(base,n) function. For a given base, determine whether the base is a good base of a given number n, and the time complexity of this judgment function is O(log N).
 
 The search space is naturally 0 to n - 1. 
 
@@ -34,7 +34,7 @@ class Solution(object):
 However, the range given by n is [3, 10^18], and even the method of O(N log N) is unacceptable.
 '''
 
-# 2 (not working)
+# 2 (not working!!!!!!!!!!! probably wrong)
 '''
 Better Solution
 Naive Solution searches the entire solution space by traversing the base. In addition, we can traverse the entire solution space by traversing the number of bits after the conversion, so that the search scope is much smaller. 
