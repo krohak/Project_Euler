@@ -1,7 +1,5 @@
-
-
 # state is a dict
-# {day, num_stock, profit}
+# { num_stock, profit}
 
 # actions
 # buy, sell, cooldown
