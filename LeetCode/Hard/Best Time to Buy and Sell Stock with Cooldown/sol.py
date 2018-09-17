@@ -18,7 +18,7 @@
 # cant sell two consecutive days
 
 
-
+memo = {}
 
 def generateNextActions(prev_action, state):
 
@@ -43,6 +43,12 @@ def generateNextActions(prev_action, state):
 # apply actions and store in memo table
 def applyAction(state, day, prices, action):
 
+    global memo
+    # print(day)
+
+    if (day, action) in memo:
+        return memo[(day,action)]
+
     n = len(prices)
     if day < n:
 
@@ -51,40 +57,71 @@ def applyAction(state, day, prices, action):
             state['num_stock']+=1
             state['profit']-=prices[day]
 
-            actions = generateNextActions( 'b', state= state)
-
 
         elif action == 's':
             state['num_stock']-=1
             state['profit']+=prices[day]
-
-            actions = generateNextActions( 's', state= state)
+            
 
         elif action == 'c':
-            actions = generateNextActions( 'c', state= state)
+            pass
 
-        for action in actions:
-            profit = applyAction(state, day+1, prices, action)
+       
+
+        # if day < n-1:
+        # next action based on updated state and action
+        actions = generateNextActions(action, state)
+        
+        max_profit = 0
+        for act in actions:    
+            profit = applyAction(state, day+1, prices, act)
+            if profit>max_profit:
+                max_profit = profit
+
+        memo[(day,action)] = max_profit
+        return max_profit
 
     else:
         return state['profit']
+                
+
+        
 
 
 
 
 def main(prices):
 
-    num_stock = 0
-    profit = 0
-    state={'day':0, 'num_stock':num_stock,'profit':profit}
+    global memo
 
     # first day we buy
+    state={'num_stock':1,'profit':-prices[0]}
     actions = generateNextActions('b', state= state)
+    max_p_1 = 0
     for action in actions:
-       applyAction(state, 0, prices[0], action)
-
+        profit = applyAction(state, 1, prices, action)
+        if max_p_1 < profit:
+            max_p_1 = profit
+    
 
     # first day we cooldown
+    state={'num_stock':0,'profit':0}
     actions = generateNextActions('c', state= state)
+    max_p_2 = 0
     for action in actions:
-       applyAction(state, 0, prices[0], action)
+        profit = applyAction(state, 1, prices, action)
+        if max_p_2 < profit:
+            max_p_2 = profit
+
+    max_profit = max(max_p_1, max_p_2)
+    # print(profit1, profit2)
+
+    return max_profit
+
+
+prices = [1,2,3,0,2]
+# prices = [1,2,3,0]
+
+max_profit = main(prices)
+print(max_profit)
+print(memo)
