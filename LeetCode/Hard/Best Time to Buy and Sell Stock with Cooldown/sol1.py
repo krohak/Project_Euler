@@ -15,3 +15,8 @@ class Solution:
             sell[i] = max(sell[i-1], buy[i-1]+prices[i])
             buy[i] = max(buy[i-1], sell[i-2]-prices[i] if i-2>=0 else -prices[i])
         return sell[n-1]
+
+
+prices = [1,2,3,0,2]
+sol = Solution().maxProfit(prices)
+print(sol)
