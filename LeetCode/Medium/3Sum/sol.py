@@ -1,6 +1,7 @@
 
 # a+b+c = 0 ?
-
+# from hashlib import sha224
+# sha224(str(l).encode('utf-8')).hexdigest()
 
 def threeSUM(arr):
 
@@ -12,6 +13,10 @@ def threeSUM(arr):
         else:
             pos_map[elem]+=1
 
+    arr = set(arr)
+    arr = list(arr)
+    print(arr)
+    
     sol = []
 
     n = len(arr)
