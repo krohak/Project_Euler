@@ -77,6 +77,10 @@ vector<int> Graph::shortestPath(int src)
 
 vector <int>* Graph::query(){
 
+    // FLOYD-WARSHALL
+    // https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm
+    // ALL PAIRS SHORTEST PATHS
+
   for(int i = 0; i < V; i++){ //initialize all v to v dist to 0
     addEdge(i, i, 0);
   }
