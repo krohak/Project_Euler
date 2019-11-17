@@ -33,8 +33,8 @@ class Graph(object):
                 self.dfs(node, explored)
 
     def dfs(self, initial, explored):
-        if not self.edges[initial]:
-            return
+        # if not self.edges[initial]:
+        #     return
         explored.add(initial)
         for neighbour in self.edges[initial]:
             if neighbour not in explored:
