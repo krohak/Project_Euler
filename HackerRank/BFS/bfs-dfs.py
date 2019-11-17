@@ -1,5 +1,5 @@
 from collections import defaultdict
-def Graph(object):
+class Graph(object):
     def __init__(self,n):
         self.edges=defaultdict(set)
         self.n=n
