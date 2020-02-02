@@ -1,6 +1,5 @@
 from collections import deque
 
-
 class Solution(object):
     def ladderLength(self, beginWord, endWord, wordList):
         
@@ -30,3 +29,10 @@ class Solution(object):
         
         d = construct_dict(set(wordList))
         return bfs_words(beginWord, endWord, d)
+
+
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot","dot","dog","lot","log","cog"]
+sol = Solution().ladderLength(beginWord, endWord, wordList)
+print(sol)
