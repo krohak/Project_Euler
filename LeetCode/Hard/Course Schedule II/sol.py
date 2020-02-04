@@ -5,33 +5,46 @@ class Solution:
         self.adj_matrix = []
 
         self.explored = set()
-        self.clock = -1
+        self.clock = 0
+        self.pre_clock = {}
         self.post_clock = {}
 
-    def canFinish(self, numCourses, prerequisites):
+    def findOrder(self, numCourses, prerequisites):
 
         self.num_courses = numCourses
 
-        check = self.build_adj(numCourses, prerequisites)
-        if not check:
-            return False
+        if not self.build_adj(numCourses, prerequisites):
+            return []
+            
+        self.call_dfs()
 
-        check = self.call_dfs()
-        if not check:
-            return False
+        if not self.check_backedges():
+            return []
 
-        return True
-        # asc_postorders = self.sort_postorders()
+        return self.sort_postorders()
     
+    def sort_postorders(self):
 
-    # def sort_postorders(self):
+        asc_postorders = [-1]*2*self.num_courses
 
-    #     asc_postorders = [-1]*2*self.num_courses
+        for i in range(self.num_courses):
+            asc_postorders[self.post_clock[i]] = i
 
-    #     for i in range(self.num_courses):
-    #         asc_postorders[self.post_clock[i]]
+        desc_postorders = []
+        for i in reversed(range(2*self.num_courses)):
+            if asc_postorders[i] != -1:
+                desc_postorders.append(asc_postorders[i])
 
-    #     return asc_postorders 
+        return desc_postorders 
+
+    def check_backedges(self):
+
+        for from_node in range(self.num_courses):
+            for to_node in range(self.num_courses):
+                if self.adj_matrix[from_node][to_node]:
+                    if self.pre_clock[to_node] < self.pre_clock[from_node] and self.post_clock[to_node] > self.post_clock[from_node]:
+                        return False
+        return True
     
     def build_adj(self, numCourses, prerequisites):
         adj_matrix = []
@@ -50,31 +63,27 @@ class Solution:
         return True
 
     def call_dfs(self):
-        check = True
         for i in range(self.num_courses):
             if i not in self.explored:
-                check = self.dfs(i, check)
-        return check
+                self.dfs(i)
 
-    def dfs(self, node, check):
+    def dfs(self, node):
         
+        self.pre_clock[node] = self.clock
         self.clock+=1
+        
         self.explored.add(node)
         
         for neighbour in range(self.num_courses):
-            if self.adj_matrix[node][neighbour]:
-                if neighbour in self.explored:
-                    return False  
-                else:
-                    check = self.dfs(neighbour, check)
+            if self.adj_matrix[node][neighbour] and neighbour not in self.explored:
+                self.dfs(neighbour)
         
         self.post_clock[node] = self.clock
         self.clock+=1
-        return check
-
+    
 
 numCourses = 2
 prerequisites = [[0,1]]
 
-sol = Solution().canFinish(numCourses, prerequisites)
+sol = Solution().findOrder(numCourses, prerequisites)
 print(sol)
