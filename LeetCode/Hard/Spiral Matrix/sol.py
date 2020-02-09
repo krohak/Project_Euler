@@ -1,93 +1,57 @@
-answer=[] 
-
-def printForward(arr,i,j,col_end):
-    answer.append(arr[i][j])
-    while(j<col_end):
-        j+=1
-        answer.append (arr[i][j])
-    return j
-
-def printBackward(arr,i,j,col_start):
-    answer.append(arr[i][j])
-    while(j>col_start):
-        j-=1
-        answer.append(arr[i][j])
-    return j
-
-
-def printDown (arr,i,j,row_end):
-    answer.append(arr[i][j])
-    while(i<row_end):
-        i+=1
-        answer.append(arr[i][j])
-    return i
-
-
-def printUp(arr,i,j,row_start):
-    answer.append(arr[i][j])
-    while(i>row_start):
-        i-=1
-        answer.append(arr[i][j])
-    return i
-
-
-class Solution(object):
-    def spiralOrder(self, arr):
-        
-        global answer
-        answer=[] 
-
-        n_row = len(arr)
+class Solution:
     
-        if n_row == 0:
-            return []
+    def __init__(self):
+        self.count = 0
 
-        n_col = len(arr[0])     
-        if n_row == 1:
-            printForward(arr,0,0,n_col-1)
-            return answer
-                
-        row_end = n_row-1
-        row_start = 0
-        col_end = n_col-1
-        col_start = 0
+    def spiralOrder(self, matrix):
         
-        i,j = 0,0
+        self.m = len(matrix)
+        if not self.m:
+            return []
+        
+        self.n = len(matrix[0])
+        if not self.n:
+            return []
+        
+        answer = []
+        
+        row_start, row_end = 0, self.m-1
+        col_start, col_end = 0, self.n-1
+        
+        cells = self.m*self.n
+        
+        while self.count < cells:
+            
+            for (r,c) in self.spiral_layer(row_start, row_end, col_start, col_end):             
+                answer.append(matrix[r][c])
 
-        while (row_start <= row_end and col_start<=col_end):
-            
-            j = printForward(arr,i,j,col_end)
-            row_start+=1
-            i=row_start
-            if (row_start > row_end):
-                break
-            
-            i = printDown(arr,i,j,row_end)
-            col_end-=1
-            j=col_end
-            if (col_start > col_end):
-                break
-            
-            j = printBackward(arr,i,j,col_start)
-            row_end-=1
-            i=row_end
-            if (row_start > row_end):
-                break
-            
-            i = printUp(arr,i,j,row_start)
-            col_start+=1
-            j=col_start
-            if (col_start > col_end):
-                break
-
+            row_start +=1 
+            row_end -=1
+            col_start +=1
+            col_end -=1
+    
         return answer
+    
+    def spiral_layer(self, row_start, row_end, col_start, col_end):
+            
+        for c in range(col_start, col_end+1):
+            self.count+=1
+            yield (row_start, c)
+            
+        for r in range(row_start+1, row_end+1):
+            self.count+=1
+            yield (r, col_end)
 
+        if row_start < row_end and col_start < col_end:
+            
+            for c in reversed(range(col_start, col_end)):
+                self.count+=1
+                yield (row_end, c)
+                
+            for r in reversed(range(row_start+1, row_end)):
+                self.count+=1
+                yield(r, col_start)
 
-# arr = [
-#     [1,2,3],
-#     [4,5,6],
-#     [7,8,9]
-# ]
 
 arr = [
     [1,2,3,4],
@@ -95,6 +59,17 @@ arr = [
     [9,10,11,12],
     [13,14,15,16]
 ]
+
+arr = [[1,2,3],[4,5,6],[7,8,9]]
+
+arr = [
+        [1,2,3,4],
+        [5,6,7,8],
+        [9,10,11,12]
+]
+
+
+arr = [[3],[2]]
 
 solObj = Solution()
 
