@@ -17,7 +17,7 @@ class Solution(object):
             L_low[i] = min( nums[i]*L_low[i-1], nums[i]*L_high[i-1], nums[i] )
             L_high[i] = max( nums[i]*L_low[i-1], nums[i]*L_high[i-1], nums[i] )
 
-            ans = max(ans, L_high[i], L_low[i] )
+            ans = max(ans, L_high[i])
             i+=1
 
         return ans

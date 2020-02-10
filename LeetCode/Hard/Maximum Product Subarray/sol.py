@@ -9,9 +9,7 @@ class Solution:
         
         for elem in nums:
 
-            max_prod, min_prod = max(elem, 
-                            elem*max_prod, elem*min_prod), min(elem, 
-                                    elem*max_prod, elem*min_prod)
-            ans = max(ans, max_prod, min_prod)
+            max_prod, min_prod = max(elem, elem*max_prod, elem*min_prod), min(elem, elem*max_prod, elem*min_prod)
+            ans = max(ans, max_prod)
 
         return ans
