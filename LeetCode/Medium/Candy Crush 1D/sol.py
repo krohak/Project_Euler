@@ -1,5 +1,3 @@
-
-
 class Solution:
 
     def __init__(self):
@@ -8,38 +6,25 @@ class Solution:
         self.stable = False
 
     def candy_crush_caller(self, text):
-        while not self.stable:
-            text = self.candy_crush(text)
-        return text
-
-    def candy_crush(self, text):
-
         self.text_arr = list(text)
 
         self.n = len(self.text_arr)
 
-        i = 0
-        while i < self.n:
-            i = self.find_consecutive(i)
-
+        while not self.stable:
+            self.candy_crush()
+        
         text = self.clean_text_arr()
 
         return text
 
-    
-    def clean_text_arr(self):
-
-        text_arr = []
+    def candy_crush(self):
+        i = 0
         self.stable = True
-        for i in range(0, self.n):
-            if not self.text_arr[i] == None:
-                text_arr.append(self.text_arr[i])
+        while i < self.n:
+            if self.text_arr[i]:
+                i = self.find_consecutive(i)
             else:
-                self.stable = False
-
-        text = ''.join(text_arr)
-
-        return text
+                i+=1
     
     def find_consecutive(self, i):
         
@@ -47,20 +32,30 @@ class Solution:
         char = self.text_arr[i]
         counter = 0
 
-        while(pointer<self.n and self.text_arr[pointer] == char):
-            counter+=1
+        while(pointer<self.n):
+            if self.text_arr[pointer] == char:
+                counter+=1
+            elif not self.text_arr[pointer] == None:
+                break
             pointer+=1
-
-        pointer = i
-        if(counter>=3):
-            while(counter):
-                self.text_arr[pointer] = None
-                pointer+=1
-                counter-=1
         
-            return pointer
-        else:
-            return pointer+1
+        if(counter>=3):
+            self.stable = False
+            for p in range(i, pointer):
+                if self.text_arr[p]:
+                    self.text_arr[p] = None
+        
+        return pointer
+
+    def clean_text_arr(self):
+
+        text_arr = []
+        for i in range(0, self.n):
+            if not self.text_arr[i] == None:
+                text_arr.append(self.text_arr[i])
+
+        text = ''.join(text_arr)
+        return text
 
 
 test = "aaabbbc"
