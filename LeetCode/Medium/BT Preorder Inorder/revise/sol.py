@@ -15,7 +15,7 @@ class Solution:
         
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
 
-        instart, inend = 0, len(preorder)-1
+        instart, inend = 0, len(inorder)-1
         # self.buildTreeRec.preIndex = 0
         return self.buildTreeRec(preorder, inorder, instart, inend)
 
