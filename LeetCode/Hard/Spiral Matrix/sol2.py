@@ -1,3 +1,5 @@
+class Solution:
+    
     def spiralOrder(self, matrix):
         
         m = len(matrix)
