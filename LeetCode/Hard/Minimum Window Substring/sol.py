@@ -37,7 +37,7 @@ class Solution:
                     min_window = end-start+1
                     min_start = start
                     min_end = end
-                            
+
                 if s[start] in freq_map_window:
                     freq_map_window[s[start]] -= 1
                     
