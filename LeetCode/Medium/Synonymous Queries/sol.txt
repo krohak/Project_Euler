@@ -1,0 +1,86 @@
+# https://medium.com/@alexgolec/google-interview-problems-synonymous-queries-36425145387c
+
+Imagine you operate a popular search engine and in your logs you observe two queries, let’s say “obama approval ratings” and “obama popularity rate.” 
+Those two queries are different strings,
+but I think we can all agree that they’re basically searching for the same thing, and should be considered equivalent when counting queries, showing results, etc.
+How can we detect that two queries are synonymous?
+
+Example:
+SYNONYMS = [
+  ('rate', 'ratings'),
+  ('rate', 'evalution'),
+  ('approval', 'popularity'),
+]
+
+QUERIES = [
+  ('obama approval rate', 'obama popularity ratings'), 
+  ('obama approval rates', 'obama popularity ratings'),
+  ('obama approval rate', 'popularity ratings obama')
+]
+
+Everyone -> True, False
+
+
+average string length of query_pair[0] = M
+no of queries = N
+
+N*M
+
+from collection import defaultdict
+
+def synonymous_queries(queries, synonyms):
+  
+  synonym_dict = defaultdict(set)
+  
+  for word1, word2 in synonyms:
+    synonym_dict[word1].add(word2)
+    
+   
+  ans_list = []
+  
+   for query_1, query_2 in queries:
+      
+      q1 = query_1.split()
+      q2 = query2.split()
+      
+      if not len(q1) == len(q2):
+        ans_list.append(False)
+        continue
+
+      n = len(q1)
+      
+      is_syn = True
+      
+      for i in range(n):
+        
+        if q1[i] == q2[i]:
+          continue          
+          
+        else:
+          if q1[i] in synonym_dict:
+            if q2[i] in synonym_dict[q1[i]]:
+              continue
+            else:
+               is_syn = False
+               break
+              
+           
+          elif q2[i] in synonym_dict:
+            if q1[i] in synonym_dict[q2[i]]:
+              continue
+             else:
+               is_syn = False
+               break
+           
+          else:
+            is_syn = False
+            break
+          
+         
+        ans_list.append(is_syn)
+        return ans_list
+
+  
+    
+  
+  
