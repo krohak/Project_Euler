@@ -1,23 +1,19 @@
 class Solution:
     def subarraySum(self, nums, target_sum):
-
-        counter = 0
-
-        sum_dict = {0:1}
         
-        current_sum = 0
-
-        for i in range(0, len(nums)):
-            current_sum += nums[i]
-
-            if (current_sum-target_sum) in sum_dict:
-                counter+=sum_dict[current_sum-target_sum]
-
-            if current_sum in sum_dict:
-                sum_dict[current_sum]+=1
-            else:
-                sum_dict[current_sum]=1
-
+        cumulative_sum = {0:1}
+        
+        counter = 0
+        
+        summ = 0
+        for num in nums:
+            summ+=num
+            
+            if (summ-target_sum) in cumulative_sum:
+                counter+=cumulative_sum[(summ-target_sum)]
+            
+            cumulative_sum[summ] = cumulative_sum.get(summ, 0)+1
+            
         return counter
 
 
