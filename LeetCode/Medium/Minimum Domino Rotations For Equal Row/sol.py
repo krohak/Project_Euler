@@ -18,8 +18,6 @@ class Solution:
         
         return min(c1, c2)
             
-            
-    
     def takePath(self, n, number, A, B):
         
         c1 = 0
