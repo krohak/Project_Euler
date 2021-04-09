@@ -1,77 +1,49 @@
 class Solution:
-    
-    def __init__(self):
-        self.count = 0
-
     def spiralOrder(self, matrix):
         
-        self.m = len(matrix)
-        if not self.m:
-            return []
+        #m rows, n cols
+        m = len(matrix)
+        if not m: return []
+        n = len(matrix[0])
+        if not n: return []
+        self.matrix = matrix
         
-        self.n = len(matrix[0])
-        if not self.n:
-            return []
+        top, bottom = 0, m-1
+        left, right = 0, n-1
         
-        answer = []
+        self.i, self.j = 0, 0
         
-        row_start, row_end = 0, self.m-1
-        col_start, col_end = 0, self.n-1
-        
-        cells = self.m*self.n
-        
-        while self.count < cells:
+        spiral = []
+        while top <= bottom and left <= right:
+            spiral.extend([ n for n in self.printRight(left, right) ])
+            top+=1
+            spiral.extend([ n for n in self.printDown(top, bottom) ])
+            right-=1
             
-            for (r,c) in self.spiral_layer(row_start, row_end, col_start, col_end):             
-                answer.append(matrix[r][c])
-
-            row_start +=1 
-            row_end -=1
-            col_start +=1
-            col_end -=1
+            if top <= bottom and left <= right:
+                spiral.extend([ n for n in self.printLeft(left, right) ])
+                bottom-=1
+                spiral.extend([n for n in self.printUp(top, bottom) ])
+                left+=1
+            
+        return spiral
     
-        return answer
+    def printRight(self, left, right):
+        for y in range(left, right+1):
+            self.j = y
+            yield self.matrix[self.i][y]
+            
+    def printLeft(self, left, right):
+        for y in range(right, left-1, -1):
+            self.j = y
+            yield self.matrix[self.i][y]
+            
+    def printDown(self, top, bottom):
+        for x in range(top, bottom+1):
+            self.i = x
+            yield self.matrix[x][self.j]
     
-    def spiral_layer(self, row_start, row_end, col_start, col_end):
-            
-        for c in range(col_start, col_end+1):
-            self.count+=1
-            yield (row_start, c)
-            
-        for r in range(row_start+1, row_end+1):
-            self.count+=1
-            yield (r, col_end)
-
-        if row_start < row_end and col_start < col_end:
-            
-            for c in reversed(range(col_start, col_end)):
-                self.count+=1
-                yield (row_end, c)
-                
-            for r in reversed(range(row_start+1, row_end)):
-                self.count+=1
-                yield(r, col_start)
-
-
-arr = [
-    [1,2,3,4],
-    [5,6,7,8],
-    [9,10,11,12],
-    [13,14,15,16]
-]
-
-arr = [[1,2,3],[4,5,6],[7,8,9]]
-
-arr = [
-        [1,2,3,4],
-        [5,6,7,8],
-        [9,10,11,12]
-]
-
-
-arr = [[3],[2]]
-
-solObj = Solution()
-
-answer = solObj.spiralOrder(arr)
-print(answer)
+    def printUp(self, top, bottom):
+        for x in range(bottom, top-1, -1):
+            self.i = x
+            yield self.matrix[x][self.j]

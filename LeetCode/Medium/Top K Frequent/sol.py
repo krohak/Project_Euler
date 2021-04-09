@@ -1,38 +1,8 @@
-class Solution(object):
-    def topKFrequent(self, words, k):
-        """
-        :type words: List[str]
-        :type k: int
-        :rtype: List[str]
-        """
-        
-        word_to_freq = {}
-        freq_to_word = {}
-        
-        for word in words:
-            if word in word_to_freq:
-                word_to_freq[word]+=1
-            else:
-                word_to_freq[word] = 1
-        
-        for word, freq in word_to_freq.items():
-            if freq in freq_to_word:
-                freq_to_word[freq].append(word)
-            else:
-                freq_to_word[freq] = []
-                freq_to_word[freq].append(word)
-                
-        answer = []
-        for i in range(len(words), 0, -1):
-            
-            if i in freq_to_word:
-                freq_to_word[i].sort()
-                for alphabetical_word in freq_to_word[i]:
-                    answer.append(alphabetical_word)
-        
-        if k <= len(answer):
-            return answer[:k]
-        
-        return answer
-                    
-            
+from collections import Counter
+import heapq
+
+class Solution:
+    def topKFrequent(self, nums, k):
+        numsCount = list([(-v, k) for k, v in Counter(nums).items()])
+        heapq.heapify(numsCount)
+        return [heapq.heappop(numsCount)[1] for _ in range(k)]
