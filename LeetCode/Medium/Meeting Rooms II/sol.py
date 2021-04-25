@@ -1,18 +1,18 @@
 import heapq
 
 class Solution:
-    def minMeetingRooms(self, intervals):
+    def minMeetingRooms(self, intervals: list) -> int:
+        
         sortedIntervals = sorted(intervals)
-        minEndings = [sortedIntervals[0][1]]
+        heap = [0]
+        heapq.heapify(heap)
+        rooms = 1
         
-        heapq.heapify(minEndings)
-        minRooms = 1
-        
-        for (start, end) in sortedIntervals[1:]:
-            if start < minEndings[0]:
-                minRooms+=1
+        for start, end in sortedIntervals:
+            if start < heap[0]:
+                rooms+=1
             else:
-                heapq.heappop(minEndings)
-            heapq.heappush(minEndings, end)
+                heapq.heappop(heap)
+            heapq.heappush(heap, end)
             
-        return minRooms
+        return rooms

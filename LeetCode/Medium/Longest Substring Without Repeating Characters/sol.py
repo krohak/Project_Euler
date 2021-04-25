@@ -1,33 +1,23 @@
 class Solution:
-    def lengthOfLongestSubstring(self, s):
-
-        length = len(s)
-        if not length:
-            return 0
-
-        pos_dict = {}
-        max_substring = 0
-
-        start, end = 0, 0
-        while(start < length and end < length):
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        
+        doneLetters = {}
+        
+        maxLen = 0
+        currLen = 0
+        i = 0
+        
+        while i < len(s):
             
-            if not s[end] in pos_dict:
-                pos_dict[s[end]] = end
-                
+            if s[i] in doneLetters:
+                maxLen = max(currLen, maxLen)
+                currLen = 0
+                i=doneLetters[s[i]]+1
+                doneLetters = {}
+            
             else:
-                for i in range(start, pos_dict[s[end]]):
-                    pos_dict.pop(s[i], None)
-                start=pos_dict[s[end]]+1
-                pos_dict[s[end]] = end
-
-            max_substring = max(max_substring, end-start+1)
-            end+=1
-
-        return max_substring
-
-s = "llwpwke"
-# s = "wpwke"
-# s = "wpwpk"
-# s = "abcabcbb"
-sol = Solution().lengthOfLongestSubstring(s)
-print(sol)
+                doneLetters[s[i]] = i
+                currLen+=1
+                i+=1
+        
+        return max(currLen, maxLen)
