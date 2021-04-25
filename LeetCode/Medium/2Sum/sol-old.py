@@ -1,7 +1,7 @@
 from collections import Counter
 
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSum(self, nums: list, target: int) -> list:
         counterMap = Counter(nums)
         answer, other = [], None
         
