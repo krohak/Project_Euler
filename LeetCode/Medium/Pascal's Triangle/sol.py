@@ -1,30 +1,15 @@
 class Solution:
-    def generate(self, numRows):
+    def generate(self, numRows: int) -> list:
+        pascalTri = [[1]]
         
-        if not numRows:
-            return []
-        if numRows == 1:
-            return [[1]]
-        
-        answers = []
-        
-        answers.append([1])
-        
-        ans_prev = [1,1]
-        answers.append(ans_prev)
-        
-        for _ in range(numRows-2):
-            len_ans_prev = len(ans_prev)
+        for i in range(1, numRows):
             
-            ans = []
-            ans.append(1)
+            curLevel = [ 1 for _ in range(i+1)]
+            pastLevel = pascalTri[-1]
             
-            for i in range(1, len_ans_prev):
-                ans.append(ans_prev[i-1] + ans_prev[i])
-            ans.append(1)
+            for j in range(1, i):
+                curLevel[j] = pastLevel[j-1]+pastLevel[j]
             
-            answers.append(ans)
-            ans_prev = ans
+            pascalTri.append(curLevel)
         
-        return answers
-            
+        return pascalTri
