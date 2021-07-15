@@ -4,8 +4,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        maxArr = [ None for _ in range(len(nums)) ]
-        maxArr[0] = nums[0]
+        L = [ num for num in nums ]
+        
+        
         for i in range(1, len(nums)):
-            maxArr[i] = max(maxArr[i-1]+nums[i], nums[i])
-        return max(maxArr)
+            
+            L[i] = max( L[i-1]+L[i], L[i])
+        
+        
+        return max(L)
