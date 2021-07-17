@@ -1,44 +1,30 @@
-
-def call_quick_sort(arr):
-    n = len(arr)
-    quick_sort(arr, 0, n-1, n)
+def callQuickSort(arr):
+    quickSort(arr, 0, len(arr)-1)
     return arr
 
-def quick_sort(arr, start, end, n):
+def quickSort(arr, left, right):
+    if left >= right: return
+    arr, pivotI = sortAroundPivot(arr, left, right)
+    quickSort(arr, left, pivotI-1)
+    quickSort(arr, pivotI+1, right)
+    
 
-    if start>=end:
-        return
+def sortAroundPivot(arr, left, right):
+    pivot = arr[left]
+    i, j, x = left, right, left+1
+    while i < j:
+        if arr[x] <= pivot:
+            arr[x], arr[i] = arr[i], arr[x]; i+=1; x+=1
+        else:
+            arr[x], arr[j] = arr[j], arr[x]; j-=1
+    arr[i] = pivot
+    return arr, i
 
-    index = pick_pivot_and_place(arr, start, end)
-    if index>0:
-        quick_sort(arr, start, index-1, n)
-    if index<n-1:
-        quick_sort(arr, index+1, end, n)
-
-
-def pick_pivot_and_place(arr, start, end):
-
-    pivot_elem = arr[start]
-    left = start+1
-    right = end
-
-    while(left<right):
-
-        while(left<right and arr[left]< pivot_elem):
-            left+=1
-        while(left<right and arr[right]>pivot_elem):
-            right-=1
-        
-        if left<right:
-            arr[left], arr[right] = arr[right], arr[left]
-            left+=1
-            right-=1
-
-    arr[right], arr[start] = arr[start], arr[right]
-    return right
-
-arr = [3,6,10,2,7,4,5,9,1,8]
-# arr =  [1,1,1,0,0,0,0]
-# arr = [3,6,10,2,7,4,5,9,1,8,3,6,10,2,7,4,5,9,1,8]
-ans = call_quick_sort(arr)
-print(ans)
+import numpy as np
+for k in range(1):
+    n=100
+    randomList = np.random.rand(100)*100
+    print(randomList)
+    randomList = callQuickSort(randomList)
+    print(randomList)
+    print(all(randomList[i] <= randomList[i+1] for i in range(len(randomList)-1)))
