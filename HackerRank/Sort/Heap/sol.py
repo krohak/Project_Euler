@@ -2,11 +2,8 @@ import heapq
 
 def heapSort(arr):
     heapq.heapify(arr)
-    ans = []
-    while arr:
-        elem = heapq.heappop(arr)
-        ans.append(elem)
-    return ans
+    n = len(arr)
+    return [ heapq.heappop(arr) for _ in range(n) ]
 
 import numpy as np
 for k in range(1):
