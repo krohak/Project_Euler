@@ -18,7 +18,7 @@ Course Schedule 1 & 2
 Meeting Rooms 1 & 2
 LRU Cache
 Spiral Matrix
-Num of Islands
+    Num of Islands
 Top K Frequent
 2Sum
 3Sum
