@@ -14,7 +14,7 @@ Longest Increasing Subsequence
 
 *Yelp List*
 Longest Substring Without Repeating Characters
-Course Schedule 1 & 2
+    Course Schedule 1 & 2
 Meeting Rooms 1 & 2
 LRU Cache
 Spiral Matrix

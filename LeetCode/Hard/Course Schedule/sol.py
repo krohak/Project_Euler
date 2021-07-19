@@ -1,38 +1,34 @@
-class Solution:
-    
-    def __init__(self):
-        self.explored = set()
-        self.previsit = []
-        self.postvisit = []
-        self.clock = 0
-        
-    def canFinish(self, numCourses, prerequisites):
-        self.courseGraph = { n:[] for n in range(numCourses) }
-        for c1, c2 in prerequisites: self.courseGraph[c1].append(c2)
-        self.previsit = [ None for _ in range(numCourses) ]
-        self.postvisit = [ None for _ in range(numCourses) ]
-        
-        for c in range(numCourses):
-            if c not in self.explored:
-                self.dfs(c)
-        
-        for c, neighbours in self.courseGraph.items():
-            for n in neighbours:
-                if self.checkBackEdge(c, n): return False
-        
-        return True
-                
-    def dfs(self, c):
-        self.explored.add(c)
-        self.previsit[c] = self.clock
-        self.clock +=1
-        for n in self.courseGraph[c]:
-            if n not in self.explored:
-                self.dfs(n)
-        self.postvisit[c] = self.clock
-        self.clock +=1
+from collections import defaultdict
 
-    def checkBackEdge(self, c, n):
-        if self.previsit[n] <= self.previsit[c] and self.postvisit[c] <= self.postvisit[n]:
-            return True
-        return False
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites):
+        self.preVisit = [ None for _ in range(numCourses) ] 
+        self.postVisit = [ None for _ in range(numCourses) ]
+        self.timer = 0
+        self.graph = defaultdict(set)
+        
+        for r1, r2 in prerequisites:
+            self.graph[r2].add(r1)
+            
+        self.visited = set()
+        for i in range(numCourses):
+            if i not in self.visited:
+                self.dfs(i)
+        
+        for i in range(numCourses):
+            for j in self.graph[i]:
+                if self.checkBackEdge(i,j): return False
+        return True
+    
+    def dfs(self, node):
+        self.preVisit[node] = self.timer
+        self.timer+=1
+        self.visited.add(node)
+        for neighbor in self.graph[node]:
+            if neighbor not in self.visited:
+                self.dfs(neighbor)
+        self.postVisit[node] = self.timer
+        self.timer+=1
+        
+    def checkBackEdge(self, i, j):
+        return self.preVisit[j] <= self.preVisit[i] and self.postVisit[j] >= self.postVisit[i]

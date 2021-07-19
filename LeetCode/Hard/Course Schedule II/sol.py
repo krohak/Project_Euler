@@ -1,89 +1,41 @@
+from collections import defaultdict
+
 class Solution:
-
-    def __init__(self):
-        self.num_courses = 0
-        self.adj_matrix = []
-
-        self.explored = set()
-        self.clock = 0
-        self.pre_clock = {}
-        self.post_clock = {}
-
-    def findOrder(self, numCourses, prerequisites):
-
-        self.num_courses = numCourses
-
-        if not self.build_adj(numCourses, prerequisites):
-            return []
+    def findOrder(self, numCourses: int, prerequisites):
+        self.preVisit = [ None for _ in range(numCourses) ] 
+        self.postVisit = [ None for _ in range(numCourses) ]
+        self.timer = 0
+        self.graph = defaultdict(set)
+        
+        for r1, r2 in prerequisites:
+            self.graph[r2].add(r1)
             
-        self.call_dfs()
-
-        if not self.check_backedges():
-            return []
-
-        return self.sort_postorders()
-    
-    def sort_postorders(self):
-
-        asc_postorders = [-1]*2*self.num_courses
-
-        for i in range(self.num_courses):
-            asc_postorders[self.post_clock[i]] = i
-
-        desc_postorders = []
-        for i in reversed(range(2*self.num_courses)):
-            if asc_postorders[i] != -1:
-                desc_postorders.append(asc_postorders[i])
-
-        return desc_postorders 
-
-    def check_backedges(self):
-
-        for from_node in range(self.num_courses):
-            for to_node in range(self.num_courses):
-                if self.adj_matrix[from_node][to_node]:
-                    if self.pre_clock[to_node] < self.pre_clock[from_node] and self.post_clock[to_node] > self.post_clock[from_node]:
-                        return False
-        return True
-    
-    def build_adj(self, numCourses, prerequisites):
-        adj_matrix = []
-        for _ in range(numCourses):
-            nest = []
-            for _ in range(numCourses):
-                nest.append(0)
-            adj_matrix.append(nest)
-        self.adj_matrix = adj_matrix
-
-        for req in prerequisites:
-            to_node, from_node = req[0], req[1]
-            if from_node > self.num_courses or to_node > self.num_courses:
-                return False
-            self.adj_matrix[from_node][to_node] = 1
-        return True
-
-    def call_dfs(self):
-        for i in range(self.num_courses):
-            if i not in self.explored:
+        self.visited = set()
+        for i in range(numCourses):
+            if i not in self.visited:
                 self.dfs(i)
-
-    def dfs(self, node):
         
-        self.pre_clock[node] = self.clock
-        self.clock+=1
+        for i in range(numCourses):
+            for j in self.graph[i]:
+                if self.checkBackEdge(i,j): return []
         
-        self.explored.add(node)
-        
-        for neighbour in range(self.num_courses):
-            if self.adj_matrix[node][neighbour] and neighbour not in self.explored:
-                self.dfs(neighbour)
-        
-        self.post_clock[node] = self.clock
-        self.clock+=1
+        return self.postOrdered(numCourses)
     
+    def dfs(self, node):
+        self.preVisit[node] = self.timer
+        self.timer+=1
+        self.visited.add(node)
+        for neighbor in self.graph[node]:
+            if neighbor not in self.visited:
+                self.dfs(neighbor)
+        self.postVisit[node] = self.timer
+        self.timer+=1
+        
+    def checkBackEdge(self, i, j):
+        return self.preVisit[j] <= self.preVisit[i] and self.postVisit[j] >= self.postVisit[i]
 
-numCourses = 2
-prerequisites = [[0,1]]
-
-sol = Solution().findOrder(numCourses, prerequisites)
-print(sol)
+    def postOrdered(self, numCourses):
+        sortArr = [ None for _ in range(numCourses*2)]
+        for i, time in enumerate(self.postVisit):
+            sortArr[time] = i
+        return [ i for i in reversed(sortArr) if not i == None ]
