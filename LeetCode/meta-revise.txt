@@ -11,14 +11,16 @@ https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
 Longest Increasing Subsequence
 
 
-
 *Yelp List*
 Longest Substring Without Repeating Characters
-    Course Schedule 1 & 2
 Meeting Rooms 1 & 2
-LRU Cache
 Spiral Matrix
+Insert Delete GetRandom O(1) [choice]
+Random Pick with Weight [bisect]
+    LRU Cache [OrderedDict]
+    Course Schedule 1 & 2 [defaultdict]
     Num of Islands
-Top K Frequent
-2Sum
-3Sum
+    Top K Frequent [heapq, Counter]
+    2Sum
+    3Sum
+    Sliding Window Maximum [deque]
