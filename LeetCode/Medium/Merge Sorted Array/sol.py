@@ -1,33 +1,13 @@
-class Solution:
+class Solution(object):
     def merge(self, nums1, m, nums2, n):
-        """
-        Do not return anything, modify nums1 in-place instead.
-        """
-        
-        nums1_pointer = m-1
-        nums2_pointer = n-1
-        
-        pointer = len(nums1)-1
-        
-        while pointer >= 0:
-            
-            if nums2_pointer < 0:
-                nums1[pointer] = nums1[nums1_pointer]
-                nums1_pointer-=1
-            
-            elif nums1_pointer < 0:
-                nums1[pointer] = nums2[nums2_pointer]
-                nums2_pointer-=1
-            
-            elif nums1[nums1_pointer] >= nums2[nums2_pointer]:
-                nums1[pointer] = nums1[nums1_pointer]
-                nums1_pointer-=1
-            
+        read1, read2 = m-1, n-1
+        write = m+n-1
+        while(write >= 0):
+            if read2 < 0 or (read1>=0 and nums1[read1] >= nums2[read2]):
+                nums1[write] = nums1[read1]
+                read1-=1
             else:
-                nums1[pointer] = nums2[nums2_pointer]
-                nums2_pointer-=1
-            
-            pointer-=1
-            
-        return
-                
+                nums1[write] = nums2[read2]
+                read2-=1
+            write-=1
+        return nums1

@@ -1,5 +1,6 @@
 {
     "python.jediEnabled": false,
     "python.linting.pylintEnabled": true,
-    "python.languageServer": "Pylance"
+    "python.languageServer": "Pylance",
+    "workbench.preferredDarkColorTheme": "Default Dark+"
 }
