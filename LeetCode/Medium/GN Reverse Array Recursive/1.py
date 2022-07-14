@@ -35,17 +35,16 @@ n = len(arr)
 
 
 
-def realRecursiveN(arr):
-    if len(arr)==1:
-        return arr
-    return [arr[-1]] + realRecursiveN(arr[:-1])
+def recursiveReverse(arr):
+    if len(arr)<2: return arr
+    return [arr[-1]] + recursiveReverse(arr[:-1])
 
 
 
 arr = [1,2,3,4,5,6,7,8]
 # arr = [1,2,3,4,5]
 # arr = []
-print(realRecursiveN(arr))
+print(recursiveReverse(arr))
 
 def realRecursive(arr):
     if len(arr)<=1:
@@ -80,7 +79,7 @@ def reverseArrInPlace(arr):
         first+=1; last-=1
     return arr
 
-def recursiveReverse(offset):
+def recursiveReversem(offset):
     if offset > n//2:
         return
     global arr
